@@ -1,8 +1,70 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinRT", "WinRT", "{20D62FB3-F041-4C42-9E38-4D4E83154B92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Correspondence.Reader.Model", "WinRT\Correspondence.Reader.Model\Correspondence.Reader.Model.csproj", "{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Correspondence.Reader.Model.Test", "WinRT\Correspondence.Reader.Model.Test\Correspondence.Reader.Model.Test.csproj", "{E312C557-C11D-4049-9759-8CD223327C41}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|ARM.Build.0 = Debug|ARM
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|x64.ActiveCfg = Debug|x64
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|x64.Build.0 = Debug|x64
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|x86.ActiveCfg = Debug|x86
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Debug|x86.Build.0 = Debug|x86
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|ARM.ActiveCfg = Release|ARM
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|ARM.Build.0 = Release|ARM
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|x64.ActiveCfg = Release|x64
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|x64.Build.0 = Release|x64
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|x86.ActiveCfg = Release|x86
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB}.Release|x86.Build.0 = Release|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|ARM.ActiveCfg = Debug|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|ARM.Build.0 = Debug|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|ARM.Deploy.0 = Debug|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x64.ActiveCfg = Debug|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x64.Build.0 = Debug|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x64.Deploy.0 = Debug|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x86.ActiveCfg = Debug|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x86.Build.0 = Debug|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Debug|x86.Deploy.0 = Debug|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|ARM.ActiveCfg = Release|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|ARM.Build.0 = Release|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|ARM.Deploy.0 = Release|ARM
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x64.ActiveCfg = Release|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x64.Build.0 = Release|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x64.Deploy.0 = Release|x64
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x86.ActiveCfg = Release|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x86.Build.0 = Release|x86
+		{E312C557-C11D-4049-9759-8CD223327C41}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0990F60C-9D46-4532-8533-6FBCBEEF2DEB} = {20D62FB3-F041-4C42-9E38-4D4E83154B92}
+		{E312C557-C11D-4049-9759-8CD223327C41} = {20D62FB3-F041-4C42-9E38-4D4E83154B92}
 	EndGlobalSection
 EndGlobal
