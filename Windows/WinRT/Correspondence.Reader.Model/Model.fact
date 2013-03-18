@@ -3,4 +3,38 @@ namespace Correspondence.Reader.Model;
 fact Individual {
 key:
     string anonymousId;
+
+query:
+    Account* accounts {
+        Attach at : at.individual = this
+        Account a : at.account = a
+    }
+
+    Feed* feeds {
+        Attach at : at.individual = this
+        Subscription s : s.account = at.account
+        Feed f : s.feed = f
+    }
+}
+
+fact Account {
+key:
+    string identifier;
+}
+
+fact Attach {
+key:
+    publish Individual individual;
+    Account account;
+}
+
+fact Feed {
+key:
+    string url;
+}
+
+fact Subscription {
+key:
+    publish Account account;
+    Feed feed;
 }
