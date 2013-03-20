@@ -9,8 +9,8 @@ namespace Correspondence.Reader.Model.Test
     [TestClass]
     public class ModelTest
     {
-        private Device _phone;
-        private Device _tablet;
+        private Device phone;
+        private Device tablet;
 
         [TestInitialize]
         public async Task Initialize()
@@ -18,18 +18,18 @@ namespace Correspondence.Reader.Model.Test
             var sharedCommunication = new MemoryCommunicationStrategy();
             string identifier = Guid.NewGuid().ToString();
 
-            _phone  = new Device("phone");
-            _tablet = new Device("tablet");
+            phone  = new Device("phone");
+            tablet = new Device("tablet");
 
-            await _phone.InitializeAsync (sharedCommunication, identifier);
-            await _tablet.InitializeAsync(sharedCommunication, identifier);
+            await phone.InitializeAsync (sharedCommunication, identifier);
+            await tablet.InitializeAsync(sharedCommunication, identifier);
         }
 
         [TestMethod]
         public async Task ModelTest_SharedAccount()
         {
-            var phoneAccont =  (await _phone .Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var tabletAccont = (await _tablet.Individual.Accounts.EnsureAsync()).FirstOrDefault();
+            var phoneAccont =  (await phone .Individual.Accounts.EnsureAsync()).FirstOrDefault();
+            var tabletAccont = (await tablet.Individual.Accounts.EnsureAsync()).FirstOrDefault();
 
             Assert.IsNotNull(phoneAccont);
             Assert.IsNotNull(tabletAccont);
@@ -39,11 +39,11 @@ namespace Correspondence.Reader.Model.Test
         [TestMethod]
         public async Task ModelTest_SubscribeToFeed_SeeSubscription()
         {
-            var account = (await _phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var feed = await _phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
-            var subscription = await _phone.Community.AddFactAsync(new Subscription(account, feed));
+            var account = (await phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
+            var feed = await phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
+            var subscription = await phone.Community.AddFactAsync(new Subscription(account, feed));
 
-            var feeds = await _phone.Individual.Feeds.EnsureAsync();
+            var feeds = await phone.Individual.Feeds.EnsureAsync();
 
             Assert.AreEqual(1, feeds.Count());
             Assert.AreEqual("http://myblog.com/rss", feeds.Single().Url);
@@ -52,13 +52,13 @@ namespace Correspondence.Reader.Model.Test
         [TestMethod]
         public async Task ModelTest_SubscribeToFeed_SharedBetweenDevices()
         {
-            var account = (await _phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var feed = await _phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
-            var subscription = await _phone.Community.AddFactAsync(new Subscription(account, feed));
+            var account = (await phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
+            var feed = await phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
+            var subscription = await phone.Community.AddFactAsync(new Subscription(account, feed));
 
             await Synchronize();
 
-            var feeds = await _tablet.Individual.Feeds.EnsureAsync();
+            var feeds = await tablet.Individual.Feeds.EnsureAsync();
 
             Assert.AreEqual(1, feeds.Count());
             Assert.AreEqual("http://myblog.com/rss", feeds.Single().Url);
@@ -66,7 +66,7 @@ namespace Correspondence.Reader.Model.Test
 
         private async Task Synchronize()
         {
-            while (await _phone.Community.SynchronizeAsync() || await _tablet.Community.SynchronizeAsync()) ;
+            while (await phone.Community.SynchronizeAsync() || await tablet.Community.SynchronizeAsync()) ;
         }
     }
 }
