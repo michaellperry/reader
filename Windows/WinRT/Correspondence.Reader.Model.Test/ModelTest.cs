@@ -11,6 +11,7 @@ namespace Correspondence.Reader.Model.Test
     {
         private Device phone;
         private Device tablet;
+        private Host server;
 
         [TestInitialize]
         public async Task Initialize()
@@ -20,16 +21,18 @@ namespace Correspondence.Reader.Model.Test
 
             phone  = new Device("phone");
             tablet = new Device("tablet");
+            server = new Host();
 
             await phone.InitializeAsync (sharedCommunication, identifier);
             await tablet.InitializeAsync(sharedCommunication, identifier);
+            await server.InitializeAsync(sharedCommunication);
         }
 
         [TestMethod]
-        public async Task ModelTest_SharedAccount()
+        public void ModelTest_SharedAccount()
         {
-            var phoneAccont =  (await phone .Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var tabletAccont = (await tablet.Individual.Accounts.EnsureAsync()).FirstOrDefault();
+            var phoneAccont =  phone .Individual.Accounts.FirstOrDefault();
+            var tabletAccont = tablet.Individual.Accounts.FirstOrDefault();
 
             Assert.IsNotNull(phoneAccont);
             Assert.IsNotNull(tabletAccont);
@@ -39,34 +42,55 @@ namespace Correspondence.Reader.Model.Test
         [TestMethod]
         public async Task ModelTest_SubscribeToFeed_SeeSubscription()
         {
-            var account = (await phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var feed = await phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
-            var subscription = await phone.Community.AddFactAsync(new Subscription(account, feed));
+            await SubscribeToMyBlogOnPhoneAsync();
 
-            var feeds = await phone.Individual.Feeds.EnsureAsync();
-
-            Assert.AreEqual(1, feeds.Count());
-            Assert.AreEqual("http://myblog.com/rss", feeds.Single().Url);
+            Assert.AreEqual(1, phone.Individual.Feeds.Count());
+            Assert.AreEqual("http://myblog.com/rss", phone.Individual.Feeds.Single().Url);
         }
 
         [TestMethod]
         public async Task ModelTest_SubscribeToFeed_SharedBetweenDevices()
         {
-            var account = (await phone.Individual.Accounts.EnsureAsync()).FirstOrDefault();
-            var feed = await phone.Community.AddFactAsync(new Feed("http://myblog.com/rss"));
-            var subscription = await phone.Community.AddFactAsync(new Subscription(account, feed));
+            await SubscribeToMyBlogOnPhoneAsync();
 
             await Synchronize();
 
-            var feeds = await tablet.Individual.Feeds.EnsureAsync();
+            Assert.AreEqual(1, tablet.Individual.Feeds.Count());
+            Assert.AreEqual("http://myblog.com/rss", tablet.Individual.Feeds.Single().Url);
+        }
 
-            Assert.AreEqual(1, feeds.Count());
-            Assert.AreEqual("http://myblog.com/rss", feeds.Single().Url);
+        [TestMethod]
+        public async Task ModelTest_PublishArticle_SharedToDevices()
+        {
+            await SubscribeToMyBlogOnPhoneAsync();
+
+            await Synchronize();
+
+            Assert.AreEqual(1, server.Service.Feeds.Count());
+            await server.Community.AddFactAsync(new Article(server.Service.Feeds.Single(), "http://myblog.com/articles/1"));
+
+            await Synchronize();
+
+            Assert.AreEqual(1, phone.Individual.Feeds.Count());
+            Feed feed = phone.Individual.Feeds.Single();
+            Assert.AreEqual(1, feed.Articles.Count());
+            Assert.AreEqual("http://myblog.com/articles/1", feed.Articles.Single().Url);
         }
 
         private async Task Synchronize()
         {
-            while (await phone.Community.SynchronizeAsync() || await tablet.Community.SynchronizeAsync()) ;
+            while (
+                await phone.Community.SynchronizeAsync() ||
+                await tablet.Community.SynchronizeAsync() ||
+                await server.Community.SynchronizeAsync()) ;
+        }
+
+        private async Task SubscribeToMyBlogOnPhoneAsync()
+        {
+            var account = phone.Individual.Accounts.Single();
+            var service = await phone.Community.AddFactAsync(new FeedService());
+            var feed = await phone.Community.AddFactAsync(new Feed(service, "http://myblog.com/rss"));
+            var subscription = await phone.Community.AddFactAsync(new Subscription(account, feed));
         }
     }
 }

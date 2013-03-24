@@ -13,8 +13,10 @@ digraph "Correspondence.Reader.Model"
     rankdir=BT
     Attach -> Individual [color="red"]
     Attach -> Account
+    Feed -> FeedService [color="red"]
     Subscription -> Account [color="red"]
     Subscription -> Feed
+    Article -> Feed [color="red"]
 }
 **/
 
@@ -333,6 +335,94 @@ namespace Correspondence.Reader.Model
 
     }
     
+    public partial class FeedService : CorrespondenceFact
+    {
+		// Factory
+		internal class CorrespondenceFactFactory : ICorrespondenceFactFactory
+		{
+			private IDictionary<Type, IFieldSerializer> _fieldSerializerByType;
+
+			public CorrespondenceFactFactory(IDictionary<Type, IFieldSerializer> fieldSerializerByType)
+			{
+				_fieldSerializerByType = fieldSerializerByType;
+			}
+
+			public CorrespondenceFact CreateFact(FactMemento memento)
+			{
+				FeedService newFact = new FeedService(memento);
+
+
+				return newFact;
+			}
+
+			public void WriteFactData(CorrespondenceFact obj, BinaryWriter output)
+			{
+				FeedService fact = (FeedService)obj;
+			}
+		}
+
+		// Type
+		internal static CorrespondenceFactType _correspondenceFactType = new CorrespondenceFactType(
+			"Correspondence.Reader.Model.FeedService", 1);
+
+		protected override CorrespondenceFactType GetCorrespondenceFactType()
+		{
+			return _correspondenceFactType;
+		}
+
+        // Roles
+
+        // Queries
+        public static Query MakeQueryFeeds()
+		{
+			return new Query()
+				.JoinSuccessors(Feed.RoleService)
+            ;
+		}
+        public static Query QueryFeeds = MakeQueryFeeds();
+
+        // Predicates
+
+        // Predecessors
+
+        // Fields
+
+        // Results
+        private Result<Feed> _feeds;
+
+        // Business constructor
+        public FeedService(
+            )
+        {
+            InitializeResults();
+        }
+
+        // Hydration constructor
+        private FeedService(FactMemento memento)
+        {
+            InitializeResults();
+        }
+
+        // Result initializer
+        private void InitializeResults()
+        {
+            _feeds = new Result<Feed>(this, QueryFeeds);
+        }
+
+        // Predecessor access
+
+        // Field access
+
+        // Query result access
+        public Result<Feed> Feeds
+        {
+            get { return _feeds; }
+        }
+
+        // Mutable property access
+
+    }
+    
     public partial class Feed : CorrespondenceFact
     {
 		// Factory
@@ -378,24 +468,40 @@ namespace Correspondence.Reader.Model
 		}
 
         // Roles
+        public static Role RoleService = new Role(new RoleMemento(
+			_correspondenceFactType,
+			"service",
+			new CorrespondenceFactType("Correspondence.Reader.Model.FeedService", 1),
+			true));
 
         // Queries
+        public static Query MakeQueryArticles()
+		{
+			return new Query()
+				.JoinSuccessors(Article.RoleFeed)
+            ;
+		}
+        public static Query QueryArticles = MakeQueryArticles();
 
         // Predicates
 
         // Predecessors
+        private PredecessorObj<FeedService> _service;
 
         // Fields
         private string _url;
 
         // Results
+        private Result<Article> _articles;
 
         // Business constructor
         public Feed(
-            string url
+            FeedService service
+            ,string url
             )
         {
             InitializeResults();
+            _service = new PredecessorObj<FeedService>(this, RoleService, service);
             _url = url;
         }
 
@@ -403,14 +509,20 @@ namespace Correspondence.Reader.Model
         private Feed(FactMemento memento)
         {
             InitializeResults();
+            _service = new PredecessorObj<FeedService>(this, RoleService, memento);
         }
 
         // Result initializer
         private void InitializeResults()
         {
+            _articles = new Result<Article>(this, QueryArticles);
         }
 
         // Predecessor access
+        public FeedService Service
+        {
+            get { return _service.Fact; }
+        }
 
         // Field access
         public string Url
@@ -419,6 +531,10 @@ namespace Correspondence.Reader.Model
         }
 
         // Query result access
+        public Result<Article> Articles
+        {
+            get { return _articles; }
+        }
 
         // Mutable property access
 
@@ -525,6 +641,110 @@ namespace Correspondence.Reader.Model
 
     }
     
+    public partial class Article : CorrespondenceFact
+    {
+		// Factory
+		internal class CorrespondenceFactFactory : ICorrespondenceFactFactory
+		{
+			private IDictionary<Type, IFieldSerializer> _fieldSerializerByType;
+
+			public CorrespondenceFactFactory(IDictionary<Type, IFieldSerializer> fieldSerializerByType)
+			{
+				_fieldSerializerByType = fieldSerializerByType;
+			}
+
+			public CorrespondenceFact CreateFact(FactMemento memento)
+			{
+				Article newFact = new Article(memento);
+
+				// Create a memory stream from the memento data.
+				using (MemoryStream data = new MemoryStream(memento.Data))
+				{
+					using (BinaryReader output = new BinaryReader(data))
+					{
+						newFact._url = (string)_fieldSerializerByType[typeof(string)].ReadData(output);
+					}
+				}
+
+				return newFact;
+			}
+
+			public void WriteFactData(CorrespondenceFact obj, BinaryWriter output)
+			{
+				Article fact = (Article)obj;
+				_fieldSerializerByType[typeof(string)].WriteData(output, fact._url);
+			}
+		}
+
+		// Type
+		internal static CorrespondenceFactType _correspondenceFactType = new CorrespondenceFactType(
+			"Correspondence.Reader.Model.Article", 1);
+
+		protected override CorrespondenceFactType GetCorrespondenceFactType()
+		{
+			return _correspondenceFactType;
+		}
+
+        // Roles
+        public static Role RoleFeed = new Role(new RoleMemento(
+			_correspondenceFactType,
+			"feed",
+			new CorrespondenceFactType("Correspondence.Reader.Model.Feed", 1),
+			true));
+
+        // Queries
+
+        // Predicates
+
+        // Predecessors
+        private PredecessorObj<Feed> _feed;
+
+        // Fields
+        private string _url;
+
+        // Results
+
+        // Business constructor
+        public Article(
+            Feed feed
+            ,string url
+            )
+        {
+            InitializeResults();
+            _feed = new PredecessorObj<Feed>(this, RoleFeed, feed);
+            _url = url;
+        }
+
+        // Hydration constructor
+        private Article(FactMemento memento)
+        {
+            InitializeResults();
+            _feed = new PredecessorObj<Feed>(this, RoleFeed, memento);
+        }
+
+        // Result initializer
+        private void InitializeResults()
+        {
+        }
+
+        // Predecessor access
+        public Feed Feed
+        {
+            get { return _feed.Fact; }
+        }
+
+        // Field access
+        public string Url
+        {
+            get { return _url; }
+        }
+
+        // Query result access
+
+        // Mutable property access
+
+    }
+    
 
 	public class CorrespondenceModel : ICorrespondenceModel
 	{
@@ -549,13 +769,27 @@ namespace Correspondence.Reader.Model
 				new Attach.CorrespondenceFactFactory(fieldSerializerByType),
 				new FactMetadata(new List<CorrespondenceFactType> { Attach._correspondenceFactType }));
 			community.AddType(
+				FeedService._correspondenceFactType,
+				new FeedService.CorrespondenceFactFactory(fieldSerializerByType),
+				new FactMetadata(new List<CorrespondenceFactType> { FeedService._correspondenceFactType }));
+			community.AddQuery(
+				FeedService._correspondenceFactType,
+				FeedService.QueryFeeds.QueryDefinition);
+			community.AddType(
 				Feed._correspondenceFactType,
 				new Feed.CorrespondenceFactFactory(fieldSerializerByType),
 				new FactMetadata(new List<CorrespondenceFactType> { Feed._correspondenceFactType }));
+			community.AddQuery(
+				Feed._correspondenceFactType,
+				Feed.QueryArticles.QueryDefinition);
 			community.AddType(
 				Subscription._correspondenceFactType,
 				new Subscription.CorrespondenceFactFactory(fieldSerializerByType),
 				new FactMetadata(new List<CorrespondenceFactType> { Subscription._correspondenceFactType }));
+			community.AddType(
+				Article._correspondenceFactType,
+				new Article.CorrespondenceFactFactory(fieldSerializerByType),
+				new FactMetadata(new List<CorrespondenceFactType> { Article._correspondenceFactType }));
 		}
 	}
 }

@@ -28,13 +28,34 @@ key:
     Account account;
 }
 
+fact FeedService {
+key:
+
+query:
+    Feed* feeds {
+        Feed f : f.service = this
+    }
+}
+
 fact Feed {
 key:
+    publish FeedService service;
     string url;
+
+query:
+    Article* articles {
+        Article a : a.feed = this
+    }
 }
 
 fact Subscription {
 key:
     publish Account account;
     Feed feed;
+}
+
+fact Article {
+key:
+    string url;
+    publish Feed feed;
 }

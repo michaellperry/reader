@@ -13,6 +13,7 @@ namespace Correspondence.Reader.Model
         {
             community.Subscribe(() => individual());
             community.Subscribe(() => AccountsOf(individual()));
+            community.Subscribe(() => FeedsOf(individual()));
             return community;
         }
 
@@ -22,6 +23,14 @@ namespace Correspondence.Reader.Model
                 return new List<Account>();
 
             return individual.Accounts;
+        }
+
+        private static IEnumerable<Feed> FeedsOf(Individual individual)
+        {
+            if (individual == null)
+                return new List<Feed>();
+
+            return individual.Feeds;
         }
     }
 }
