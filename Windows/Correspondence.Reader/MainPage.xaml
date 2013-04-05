@@ -1,0 +1,203 @@
+﻿<Page
+    x:Class="Correspondence.Reader.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Correspondence.Reader"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Foreground="Black">
+
+    <Grid Background="#FFF1F1F1">
+    	<Grid x:Name="FullOrFilled">
+    		<Grid.ColumnDefinitions>
+    			<ColumnDefinition Width="409*"/>
+    			<ColumnDefinition Width="957*"/>
+    		</Grid.ColumnDefinitions>
+    		<ScrollViewer Margin="0">
+    			<StackPanel Margin="0,24,0,0">
+    				<Grid>
+    					<Grid.ColumnDefinitions>
+    						<ColumnDefinition Width="Auto"/>
+    						<ColumnDefinition Width="100"/>
+    						<ColumnDefinition/>
+    					</Grid.ColumnDefinitions>
+    					<Rectangle Fill="#FF141247" Margin="0,12,6,12" Width="12"/>
+    					<StackPanel Grid.Column="1">
+    						<Image Source="Assets/ChipOverclock.png" Stretch="Fill" Margin="6,11,6,6"/>
+    					</StackPanel>
+    					<Grid Grid.Column="2">
+    						<Grid.RowDefinitions>
+    							<RowDefinition Height="Auto"/>
+    							<RowDefinition/>
+    						</Grid.RowDefinitions>
+    						<TextBlock TextWrapping="Wrap" Text="Hard Power Off Is Dead But Not Buried" FontSize="18.667" Margin="6,6,6,0" Foreground="Black"/>
+    						<Grid Grid.RowSpan="2" Grid.Row="1">
+    							<Grid.ColumnDefinitions>
+    								<ColumnDefinition Width="41*"/>
+    								<ColumnDefinition Width="261*"/>
+    							</Grid.ColumnDefinitions>
+    							<TextBlock TextWrapping="Wrap" Text="3/4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF141247" FontSize="14.667" Margin="6,0,6,6"/>
+    							<TextBlock TextWrapping="Wrap" Text="Chip Overclock" FontSize="14.667" Foreground="#FF141247" Grid.Column="1" Margin="6,0,6,6"/>
+    						</Grid>
+    					</Grid>
+    				</Grid>
+    				<Grid>
+    					<Grid.ColumnDefinitions>
+    						<ColumnDefinition Width="Auto"/>
+    						<ColumnDefinition Width="100"/>
+    						<ColumnDefinition/>
+    					</Grid.ColumnDefinitions>
+    					<Rectangle Fill="#FF2121A0" Margin="0,12,6,12" Width="12" Opacity="0"/>
+    					<StackPanel Grid.Column="1">
+    						<Image Source="Assets/Azure.png" Stretch="Fill" Margin="6,11,6,6"/>
+    					</StackPanel>
+    					<Grid Grid.Column="2">
+    						<Grid.RowDefinitions>
+    							<RowDefinition Height="Auto"/>
+    							<RowDefinition/>
+    						</Grid.RowDefinitions>
+    						<TextBlock TextWrapping="Wrap" Text="Windows Azure Updates: Android Support, SQL Reporting Services, Active Directory, More…" FontSize="18.667" Margin="6,6,6,0" Foreground="Black"/>
+    						<Grid Grid.RowSpan="2" Grid.Row="1">
+    							<Grid.ColumnDefinitions>
+    								<ColumnDefinition Width="41*"/>
+    								<ColumnDefinition Width="261*"/>
+    							</Grid.ColumnDefinitions>
+    							<TextBlock TextWrapping="Wrap" Text="3/4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF141247" FontSize="14.667" Margin="6,0,6,6"/>
+    							<TextBlock TextWrapping="Wrap" Text="ScottGu's Blog" FontSize="14.667" Foreground="#FF141247" Grid.Column="1" Margin="6,0,6,6"/>
+    						</Grid>
+    					</Grid>
+    				</Grid>
+    				<Grid>
+    					<Grid.ColumnDefinitions>
+    						<ColumnDefinition Width="Auto"/>
+    						<ColumnDefinition Width="100"/>
+    						<ColumnDefinition/>
+    					</Grid.ColumnDefinitions>
+    					<Rectangle Fill="#FF2121A0" Margin="0,12,6,12" Width="12" Opacity="0"/>
+    					<StackPanel Grid.Column="1">
+    						<Image Source="Assets/Dilbert.png" Stretch="Fill" Margin="6,11,6,6"/>
+    					</StackPanel>
+    					<Grid Grid.Column="2">
+    						<Grid.RowDefinitions>
+    							<RowDefinition Height="Auto"/>
+    							<RowDefinition/>
+    						</Grid.RowDefinitions>
+    						<TextBlock TextWrapping="Wrap" Text="Comic for March 5, 2013" FontSize="18.667" Margin="6,6,6,0" Foreground="Black"/>
+    						<Grid Grid.RowSpan="2" Grid.Row="1">
+    							<Grid.ColumnDefinitions>
+    								<ColumnDefinition Width="41*"/>
+    								<ColumnDefinition Width="261*"/>
+    							</Grid.ColumnDefinitions>
+    							<TextBlock TextWrapping="Wrap" Text="3/4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF141247" FontSize="14.667" Margin="6,0,6,6"/>
+    							<TextBlock TextWrapping="Wrap" Text="Dilbert Daily Strip" FontSize="14.667" Foreground="#FF141247" Grid.Column="1" Margin="6,0,6,6"/>
+    						</Grid>
+    					</Grid>
+    				</Grid>
+    			</StackPanel>
+    		</ScrollViewer>
+    		<Grid Grid.Column="1" Margin="0" Background="White">
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="43*"/>
+    				<ColumnDefinition Width="870*"/>
+    				<ColumnDefinition Width="Auto"/>
+    			</Grid.ColumnDefinitions>
+    			<ScrollViewer Margin="40,0,0,0" Grid.ColumnSpan="2" BorderThickness="0">
+    				<StackPanel>
+    					<Grid Margin="0,24,0,0">
+    						<Grid.ColumnDefinitions>
+    							<ColumnDefinition Width="150"/>
+    							<ColumnDefinition/>
+    						</Grid.ColumnDefinitions>
+    						<StackPanel>
+    							<Image Source="Assets/ChipOverclock.png" Stretch="Fill" Margin="6"/>
+    						</StackPanel>
+    						<Grid Grid.Column="1">
+    							<Grid.RowDefinitions>
+    								<RowDefinition Height="Auto"/>
+    								<RowDefinition/>
+    							</Grid.RowDefinitions>
+    							<TextBlock TextWrapping="Wrap" Text="Hard Power Off Is Dead But Not Buried" FontSize="37.333" Margin="6,6,6,0" Foreground="Black"/>
+    							<Grid Grid.RowSpan="2" Grid.Row="1">
+    								<Grid.ColumnDefinitions>
+    									<ColumnDefinition Width="41*"/>
+    									<ColumnDefinition Width="261*"/>
+    								</Grid.ColumnDefinitions>
+    								<TextBlock TextWrapping="Wrap" Text="3/4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF141247" FontSize="32" Margin="6,0,6,6"/>
+    								<TextBlock TextWrapping="Wrap" Text="Chip Overclock" FontSize="32" Foreground="#FF141247" Grid.Column="1" Margin="6,0,6,6"/>
+    							</Grid>
+    						</Grid>
+    					</Grid>
+    					<TextBlock TextWrapping="Wrap" Foreground="Black" FontSize="14.667" Height="768" Margin="6">
+    						<Run Text="In The Death of Hard Power Off I talked about how the use of persistent flash-based read-write storage -- flash file systems and solid state disks -- had led to the systems using those technologies requiring soft power off: software mechanisms that implement an orderly shutdown of the device before power is actually removed. The failure to quiesce flash-based read-write storage before cycling power will eventually lead to file system corruption. Do it enough, and you have a high likelihood of bricking the entire device."/>
+    						<LineBreak/>
+    						<Run/>
+    						<LineBreak/>
+    						<Run Text="Just the other day, my occasional colleague Paul Gross passed this very recent gem of a paper along to me, for which I am grateful."/>
+    						<LineBreak/>
+    						<Run Text="Mai Zheng, Joseph Tucek, Feng Qin, Mark Lillibridge, &quot;Understanding the Robustness of SSDs under Power Fault&quot;, 11th USENIX Conference on File and Storage Technologies (FAST '13), San Jose CA USA, February 12-15, 2013"/>
+    						<LineBreak/>
+    						<Run Text="It's worth a read. Here's just a brief section from the abstract."/>
+    						<LineBreak/>
+    						<Run Text="Applying our testing framework, we test fifteen commodity SSDs from five different vendors using more than three thousand fault injection cycles in total. Our experimental results reveal that thirteen out of the fifteen tested SSD devices exhibit surprising failure behaviors under power faults, including bit corruption, shorn writes, unserializable writes, meta-data corruption, and total device failure."/>
+    						<LineBreak/>
+    						<Run Text="These researchers from the Ohio State University and H-P Labs take the same approach as unpublished (and kinda clever) work done by my occasional colleague Julie Remington, a hardware engineer who hooked up a system we were troubleshooting that had a surface-mount SSD to a computer-controlled power supply and proceeded to cycle power on the system in a controlled, scripted fashion. Each power cycle waited until the system under test was up and stable, and logged all of the results from the system's serial console. Her results: after a few iterations, the system had to use fsck to repair the EXT3 file system on the SSD (file system corruption, not unexpected under the circumstances); after a few more, the SSD began reporting a bogus device type and serial number to hdparm (internal meta-data corruption); after just a few more, the device quit responding completely to I/O commands. It could only be recovered by removing the tiny flash chips from the top of the SSD chip itself and replacing them with uncorrupted chips from an identical SSD. Which one of Julie's colleagues did. Which is kinda, you know, hard core."/>
+    						<LineBreak/>
+    						<Run/>
+    						<LineBreak/>
+    						<Run Text="But it doesn't have to be an SSD. I've seen similar failure modes in embedded systems using JFFS2 (Journaling Flash File System version 2) under Linux. JFFS2 does all the same kinds of things behind the scenes that an SSD does, except its controller is implemented in software instead of hardware, on top of commodity NAND flash. Just as the controller inside an SSD is rewriting its flash behind the scenes, the JFFS2 garbage collector kernel thread (which will look something like [jffs2_gc_mtd2], interpreted as &quot;JFFS2 Garbage Collector for Memory Technology Device partition 2&quot;, when you do a ps command) is rolling along its merry way, erasing and rewriting flash blocks with little or no regard to the fact that your finger is on the power switch."/>
+    						<LineBreak/>
+    						<Run/>
+    						<LineBreak/>
+    						<Run Text="But with JFFS2, at least you have some prayer of coming to an orderly stop if you do something like a shutdown -h now before turning off the power. Not that systems in the field with hard power off will have an opportunity to do so, of course. But at least you might save a system or two in the development lab."/>
+    						<LineBreak/>
+    						<Run/>
+    						<LineBreak/>
+    						<Run Text="The problem with SSDs is that they are not only asynchronous -- doing stuff behind the scenes -- but also autonomous -- doing stuff that you don't even know about and have no control over. The SSD controller continues to erase and rewrite flash blocks even if you unmount the file system. Even if you shut down the operating system. Even if you hold the damn processor in reset."/>
+    						<LineBreak/>
+    						<Run/>
+    						<LineBreak/>
+    						<Run Text="It's like the honey badger. Honey badger SSD don't care."/>
+    					</TextBlock>
+    				</StackPanel>
+    			</ScrollViewer>
+    			<StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+    				<Button HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource PreviousAppBarButtonStyle}" Foreground="Black"/>
+    				<Button HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource NextAppBarButtonStyle}" Foreground="Black"/>
+    				<Button
+    					Style="{StaticResource AddStarAppBarButtonStyle}" Height="100" Foreground="Black" />
+    				<Button
+    					Style="{StaticResource ReadLaterAppBarButtonStyle}" Height="100" Foreground="Black" />
+    				<Button
+    					Style="{StaticResource MarkReadAppBarButtonStyle}" Height="100" Foreground="Black" />
+    			</StackPanel>
+    		</Grid>
+    	</Grid>
+    	<Grid x:Name="SnappedOrPortrait"/>
+
+    </Grid>
+    <Page.BottomAppBar>
+        <AppBar>
+            <Grid>
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+
+                    <Button
+                        Style="{StaticResource SelectAllAppBarButtonStyle}" />
+                    <Button
+                        Style="{StaticResource RefreshAppBarButtonStyle}" />
+                    <Button
+                        Style="{StaticResource SortAppBarButtonStyle}" />
+                    <Button
+                        Style="{StaticResource ViewAppBarButtonStyle}" />
+                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource AddSubscriptionAppBarButtonStyle}"/>
+                </StackPanel>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource RemoveSubscriptionAppBarButtonStyle}"/>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+</Page>
